@@ -2,19 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 
 def cfm_web_scraper(link):
+    
     r = requests.get(link)
-
     c = r.content
-
     soup = BeautifulSoup(c, 'html.parser')
 
     player_info = soup.find_all('div', {'class': 'card flex-row align-items-center align-items-stretch rounded-left Teamcolors'})
     contract_info = soup.find_all('div', {'class': 'd-flex Teamcolors'})
     
-    d = {}
-    
     contract_info_list = [i for i in contract_info[0].text.replace('\n', ' ').split(' ') + contract_info[1].text.replace('\n', ' ').split(' ') if i != '']
     player_info_list = [i for i in player_info[0].find('div', {'class': 'col-10 py-3 rounded-right cfm-player-info'}).text.replace('\n', ' ').split(' ') if i != '']
+    
+    d = {}
     
     if player_info_list[0] != 'Ha':
         d['Name'] = player_info_list[0] + ' ' + player_info_list[1]
