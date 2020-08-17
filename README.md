@@ -7,5 +7,3 @@ Python 3 bot to be used in dadbods gaming madden league.
 
 !Tradeblock Remove [DaddyLeagueLink] [Desired Compensation]
 - This will remove the linked player from the block
-
-
