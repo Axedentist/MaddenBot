@@ -1,3 +1,4 @@
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
@@ -42,4 +43,4 @@ def cfm_web_scraper(link):
     
     d['Link'] = link
     
-    return d
+    return pd.DataFrame(d, index=[0])
