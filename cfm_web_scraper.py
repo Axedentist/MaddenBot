@@ -2,6 +2,10 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
 def cfm_web_scraper(link):
     
     r = requests.get(link)
@@ -16,24 +20,38 @@ def cfm_web_scraper(link):
     
     d = {}
     
-    if player_info_list[0] != 'Ha':
-        d['Name'] = player_info_list[0] + ' ' + player_info_list[1]
-        d['Position'] = player_info_list[2]
-        d['Overall'] = int(player_info_list[4])
-    else:
+    if player_info_list[0] == 'Ha':
         player_info_list.pop(1)
         player_info_list[0] = "Ha'Sean"
         d['Name'] = player_info_list[0] + ' ' + player_info_list[1]
         d['Position'] = player_info_list[2]
-        d['Overall'] = int(player_info_list[4])
-
-    d['Height'] = player_info_list[6]
-    d['Weight'] = player_info_list[8]
-    d['Age'] = player_info_list[10]
-    d['Years in League'] = player_info_list[12]
-
-    d['Dev'] = player_info_list[17]
-    d['Trade Value'] = player_info_list[19]
+        d['Overall'] = player_info_list[4]
+        d['Height'] = player_info_list[6]
+        d['Weight'] = player_info_list[8]
+        d['Age'] = player_info_list[10]
+        d['Years in League'] = player_info_list[12]
+        d['Dev'] = player_info_list[17]
+        d['Trade Value'] = player_info_list[19]
+    elif len(player_info_list) == 33:
+        d['Name'] = player_info_list[0] + ' ' + player_info_list[1]
+        d['Position'] = player_info_list[2]
+        d['Overall'] = player_info_list[4]
+        d['Height'] = player_info_list[6]
+        d['Weight'] = player_info_list[8]
+        d['Age'] = player_info_list[10]
+        d['Years in League'] = player_info_list[12]
+        d['Dev'] = player_info_list[17]
+        d['Trade Value'] = player_info_list[19]        
+    else:
+        d['Name'] = player_info_list[0] + ' ' + player_info_list[1] + ' ' + player_info_list[2]
+        d['Position'] = player_info_list[3]
+        d['Overall'] = int(player_info_list[5])
+        d['Height'] = player_info_list[7]
+        d['Weight'] = player_info_list[9]
+        d['Age'] = player_info_list[11]
+        d['Years in League'] = player_info_list[13]
+        d['Dev'] = player_info_list[19]
+        d['Trade Value'] = player_info_list[21]   
     
     d['Contract Total'] = contract_info_list[0]
     d['Years Total'] = contract_info_list[2]
